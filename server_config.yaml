@@ -1,0 +1,23 @@
+http_options:
+  host: 0.0.0.0
+  port: 8000
+applications:
+- name: Image-Classifier
+  route_prefix: /classify
+  import_path: image_classifier:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/0f7e5a68c95183d5a6d5c48e632c78e9010120bd/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: downloader
+  - name: ImageClassifier
+- name: Text-Translator
+  route_prefix: /translate
+  import_path: translator:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/0f7e5a68c95183d5a6d5c48e632c78e9010120bd/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: Translator
