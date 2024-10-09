@@ -1,0 +1,41 @@
+http_options:
+  host: 0.0.0.0
+  port: 8000
+applications:
+- name: Image-Classifier
+  route_prefix: /classify
+  import_path: image_classifier:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/refs/heads/main/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: downloader
+  - name: ImageClassifier
+- name: Text-Translator
+  route_prefix: /translate
+  import_path: translator:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/refs/heads/main/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: Translator
+- name: SpeechToText
+  route_prefix: /transcribe
+  import_path: speech_to_text:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/refs/heads/main/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: SpeechToText
+- name: TextToSpeech
+  route_prefix: /synthesise
+  import_path: text_to_speech:app
+  runtime_env:
+    working_dir: "https://raw.githubusercontent.com/1114neeraj/ray-serve-examples/refs/heads/main/archive.zip"
+    pip:
+      - transformers
+  deployments:
+  - name: TextToSpeech

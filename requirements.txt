@@ -1,0 +1,9 @@
+ray
+fastapi
+uvicorn
+ray[serve]
+transformers
+torch
+pillow
+python-multipart
+datasets
